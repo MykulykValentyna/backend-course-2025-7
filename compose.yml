@@ -4,24 +4,29 @@ services:
   app:
     build: . 
     ports:
-      - "3000:3000" 
+      - "3000:3000"
+      - "9229:9229"
     volumes:
-      - .:/usr/src/app 
-      - /usr/src/app/node_modules 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
-      - db 
+      - db
     env_file:
       - .env
     command: npm run start:dev
+
   db:
-    image: postgres:15-alpine 
+    image: postgres:15-alpine
     restart: always
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - db_data:/var/lib/postgresql/data 
+      - db_data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      
 volumes:
   db_data:

@@ -1,17 +1,14 @@
+require('dotenv').config();
 const express = require('express');
-const { program } = require('commander');
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
-program
-  .requiredOption('-h, --host <host>', 'Адреса сервера')
-  .requiredOption('-p, --port <port>', 'Порт сервера', parseInt)
-  .requiredOption('-c, --cache <path>', 'Шлях до директорії для кешування файлів');
-program.parse(process.argv);
-const { host, port, cache } = program.opts();
+const host = process.env.DB_HOST || '0.0.0.0';
+const port = process.env.SERVER_PORT || 3000;
+const cache = process.env.CACHE_PATH || './cache';
 
 if (!fs.existsSync(cache)) {
     fs.mkdirSync(cache, { recursive: true });
