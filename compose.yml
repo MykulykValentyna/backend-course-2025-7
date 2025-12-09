@@ -13,7 +13,7 @@ services:
       - db
     env_file:
       - .env
-    command: npm run start:dev
+    command: npm run debug
 
   db:
     image: postgres:15-alpine

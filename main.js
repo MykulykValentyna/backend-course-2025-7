@@ -501,4 +501,5 @@ app.listen(port, host, () => {
     console.log(`Сервер запущено на http://${host}:${port}`);
     console.log(`Кеш-директорія: ${cache}`);
     console.log(`Документація Swagger UI доступна на http://${host}:${port}/docs`);
+    console.log(`Перевірка зміни`);
 });
